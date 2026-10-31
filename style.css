@@ -1,0 +1,492 @@
+/* style.css: how the calendar looks.
+
+   Each season has its own palette. A palette is a set of named colours
+   (variables). The page's <body> carries data-season="0" to "3", and the
+   matching block below switches all the colours at once. */
+
+/* Colours that never change. */
+:root {
+  --iron: #2b2d31;
+  --parchment: #f1e8d4;
+  --parchment-dark: #e2d5b8;
+}
+
+/* Snowmelt: forest and sage greens. */
+[data-season="0"] {
+  --accent: #2f5d3a;
+  --accent-text: #f3f7ef;
+  --heading: #2f5d3a;
+  --page: #edf1e6;
+  --cell: #e3ecdc;
+  --cell-hover: #f2f7ee;
+  --border: #a9c19e;
+}
+
+/* Greenmeet: bright summery pastels. */
+[data-season="1"] {
+  --accent: #ffb3c7;
+  --accent-text: #2b2d31;
+  --heading: #8a3a5e;
+  --page: #fff9ec;
+  --cell: #fff4c2;
+  --cell-hover: #fffbe3;
+  --border: #8fd9c6;
+}
+
+/* Harvestide: warm oranges. */
+[data-season="2"] {
+  --accent: #b5541c;
+  --accent-text: #fff6ea;
+  --heading: #9a4513;
+  --page: #f8ecd9;
+  --cell: #fbe3c4;
+  --cell-hover: #fff0dc;
+  --border: #e8a766;
+}
+
+/* Tundrafall: pale ice blues. */
+[data-season="3"] {
+  --accent: #8fbfdc;
+  --accent-text: #1c2a35;
+  --heading: #2f6788;
+  --page: #eef5fa;
+  --cell: #e6f3fb;
+  --cell-hover: #f4fbff;
+  --border: #b5d6ea;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--page);
+  color: var(--iron);
+}
+
+header {
+  background: var(--iron);
+  color: var(--parchment);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-bottom: 4px solid var(--accent);
+}
+
+h1 {
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--parchment-dark);
+  font-style: italic;
+}
+
+main {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* The year box and the four season tabs. */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.year-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.year-control input {
+  width: 6rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+}
+
+.season-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Each tab carries its own data-season, so it wears its own season's colours. */
+.season-tab {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--cell);
+  color: var(--iron);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.season-tab:hover {
+  background: var(--cell-hover);
+}
+
+/* The season you are looking at fills in solid. */
+.season-tab[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: bold;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.75rem;
+  color: var(--heading);
+}
+
+/* On a narrow phone the 10 columns do not fit, so this box scrolls sideways. */
+.grid-scroll {
+  overflow-x: auto;
+}
+
+.season-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(4.5rem, 1fr));
+  gap: 4px;
+  min-width: 46rem;
+}
+
+.weekday-header {
+  background: var(--accent);
+  color: var(--accent-text);
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+.day {
+  background: var(--cell);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.6rem 0.5rem;
+  min-height: 3.5rem;
+}
+
+.day:hover {
+  background: var(--cell-hover);
+  border-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------
+   Phase 8: the date tracker
+   --------------------------------------------------------------- */
+.tracker {
+  max-width: 44rem;
+  margin: 0 auto 1.5rem;
+  padding: 1rem;
+  background: var(--cell);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+}
+
+.tracker h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--heading);
+}
+
+.today-text {
+  margin: 0.25rem 0;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.today-sub {
+  margin: 0 0 0.75rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.tracker .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.tracker input,
+.tracker select {
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--iron);
+  background: #ffffff;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+}
+
+.tracker input[type="number"] {
+  width: 5rem;
+}
+
+.tracker button {
+  padding: 0.5rem 0.9rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tracker button:hover {
+  filter: brightness(0.92);
+}
+
+.tracker-message {
+  min-height: 1.4em;
+  margin: 0;
+  text-align: center;
+}
+
+/* The current date, highlighted on the grid. */
+.day.today {
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: bold;
+  border: 2px solid var(--iron);
+}
+
+/* ---------------------------------------------------------------
+   Phase 7: festivals, filters and day details
+   --------------------------------------------------------------- */
+/* Each day is now a button, so it can be clicked or reached with the keyboard. */
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
+  min-height: 4.5rem;
+  font: inherit;
+  color: var(--iron);
+  text-align: left;
+  cursor: pointer;
+}
+
+.day-number {
+  font-weight: bold;
+}
+
+/* A day with a festival gets a thick coloured edge and a small label. */
+.day.has-festival {
+  border-left: 5px solid var(--accent);
+}
+
+.festival-label {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+/* Today's date keeps its solid highlight. */
+.day.today {
+  color: var(--accent-text);
+}
+
+/* The day whose details are showing. */
+.day.selected {
+  outline: 3px solid var(--iron);
+  outline-offset: 1px;
+}
+
+.day:focus-visible {
+  outline: 3px solid var(--heading);
+  outline-offset: 2px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 0;
+}
+
+.filters select {
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--iron);
+  background: #ffffff;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+}
+
+.filters button {
+  padding: 0.45rem 0.9rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.filter-count {
+  font-style: italic;
+}
+
+.day-details {
+  max-width: 44rem;
+  margin: 1.5rem auto 0;
+  padding: 1rem;
+  background: var(--cell);
+  border: 2px solid var(--accent);
+  border-radius: 6px;
+}
+
+.day-details h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--heading);
+}
+
+.details-date {
+  margin: 0 0 0.75rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.festival-card {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #ffffff;
+  border-left: 5px solid var(--accent);
+  border-radius: 4px;
+}
+
+.festival-card h3 {
+  margin: 0 0 0.25rem;
+  color: var(--heading);
+}
+
+.festival-meta {
+  margin: 0 0 0.4rem;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.festival-card p:last-child {
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------
+   Phase 7, part 2: the date-style toggle and the table of styles
+   --------------------------------------------------------------- */
+/* The set-date box with the Format buttons on its right. */
+.tracker-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.set-date-box {
+  flex: 1 1 24rem;
+}
+
+.format-box {
+  flex: 0 0 9rem;
+  text-align: center;
+}
+
+.format-label {
+  margin: 0 0 0.35rem;
+  font-weight: bold;
+  color: var(--heading);
+}
+
+/* The three buttons stack underneath the label. */
+.style-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ".tracker .style-button" beats the general ".tracker button" rule. */
+.tracker .style-button {
+  width: 100%;
+  padding: 0.45rem 0.5rem;
+  color: var(--iron);
+  background: #ffffff;
+  border: 2px solid var(--accent);
+}
+
+.tracker .style-button:hover {
+  background: var(--cell-hover);
+  filter: none;
+}
+
+/* The style in use fills in solid. */
+.tracker .style-button[aria-pressed="true"] {
+  color: var(--accent-text);
+  background: var(--accent);
+  font-weight: bold;
+}
+
+.style-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.format-table {
+  width: 100%;
+  margin: 0 0 0.75rem;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+.format-table th,
+.format-table td {
+  padding: 0.35rem 0.6rem;
+  text-align: left;
+  border: 1px solid var(--border);
+}
+
+.format-table th {
+  width: 6.5rem;
+  color: var(--heading);
+}
+
+/* A small heading inside the Day details box, such as "Dwarven calendar". */
+.details-subhead {
+  margin: 0.75rem 0 0.25rem;
+  font-size: 1rem;
+  color: var(--heading);
+}
+/* The carved calendar staves at the top of each page. */
+.stave-banner {
+  display: block;
+  width: 100%;
+  max-width: 455px;
+  height: auto;
+  margin: 0 auto 0.75rem;
+}

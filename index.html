@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Calendar of Vandaal</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="festivals.css">
+</head>
+<body data-season="0">
+  <header>
+    <h1>The Calendar of Vandaal</h1>
+    <img class="stave-banner" src="stave-banner.png" width="455" height="82"
+     alt="Two carved Norse calendar staves, one for summer and one for winter">
+    <p id="year-line" class="subtitle" aria-live="polite"></p>
+    <p class="site-nav"><a class="header-link" href="festivals.html">Browse all festivals &rarr;</a></p>
+  </header>
+
+  <main>
+    <!-- The date tracker: the heart of the site. -->
+    <section class="tracker" aria-labelledby="tracker-title">
+      <h2 id="tracker-title">Today in Vandaal</h2>
+      <p id="today-text" class="today-text" aria-live="polite"></p>
+      <p id="today-sub" class="today-sub"></p>
+      <p id="today-dwarven" class="today-sub"></p>
+      <p id="today-elven" class="today-sub"></p>
+
+      <div id="advance-buttons" class="row"></div>
+
+      <div class="row">
+        <label for="custom-days">Custom days</label>
+        <input type="number" id="custom-days" min="1" step="1" value="4">
+        <button type="button" id="custom-add">Add</button>
+        <button type="button" id="go-today">Show today on the calendar</button>
+      </div>
+
+      <div class="tracker-tools">
+        <div class="set-date-box">
+      <div class="row">
+        <label for="start-year">Set date: year</label>
+        <input type="number" id="start-year" min="1" step="1" value="714">
+        <label for="start-season">season</label>
+        <select id="start-season"></select>
+        <label for="start-day">day (1 to 50)</label>
+        <input type="number" id="start-day" min="1" max="50" step="1" value="1">
+        <button type="button" id="set-date">Set date</button>
+      </div>
+        </div>
+
+        <!-- How dates are written everywhere on the page. -->
+        <div class="format-box">
+          <p id="format-label" class="format-label">Format</p>
+          <div id="style-toggle" class="style-toggle" role="group" aria-labelledby="format-label"></div>
+          <p id="style-note" class="style-note"></p>
+
+          <p id="calendar-label" class="format-label calendar-group">Other calendar</p>
+          <div id="calendar-toggle" class="style-toggle" role="group" aria-labelledby="calendar-label"></div>
+        </div>
+      </div>
+
+      <p id="tracker-message" class="tracker-message" aria-live="polite"></p>
+    </section>
+
+    <div class="controls">
+      <div class="year-control">
+        <label for="year-input">Browse year (SL)</label>
+        <input type="number" id="year-input" min="1" step="1" value="714">
+      </div>
+      <div id="season-tabs" class="season-tabs"></div>
+    </div>
+
+    <!-- Filter the festivals shown on the calendar. -->
+    <div class="filters">
+      <label for="filter-people">Festivals for</label>
+      <select id="filter-people"></select>
+      <label for="filter-culture">Culture</label>
+      <select id="filter-culture"></select>
+      <button type="button" id="filter-clear">Show all</button>
+      <span id="filter-count" class="filter-count" aria-live="polite"></span>
+    </div>
+
+    <h2 id="season-title"></h2>
+    <div class="grid-scroll">
+      <div id="season-grid" class="season-grid"></div>
+    </div>
+
+    <!-- Details for the day you click. -->
+    <section class="day-details" aria-labelledby="details-title">
+      <h2 id="details-title">Day details</h2>
+      <div id="details-body" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="calendar-data.js"></script>
+  <script src="calendar-logic.js"></script>
+  <script src="other-calendars.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

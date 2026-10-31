@@ -1,0 +1,58 @@
+/* festivals.css: styles for the "All festivals" page and the link to it.
+   Both index.html and festivals.html load this file. */
+
+.site-nav {
+  margin: 0.5rem 0 0;
+}
+
+.header-link {
+  color: var(--parchment);
+  font-weight: bold;
+}
+
+.header-link:hover {
+  color: var(--accent);
+}
+
+/* The four jump links under the filters. */
+.season-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.season-link {
+  padding: 0.5rem 1rem;
+  color: var(--iron);
+  background: var(--cell);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.season-link:hover {
+  background: var(--cell-hover);
+}
+
+/* One block per season, wearing that season's colours (set by data-season). */
+.season-section {
+  max-width: 52rem;
+  margin: 1.5rem auto;
+}
+
+.season-section h2 {
+  padding-bottom: 0.25rem;
+  border-bottom: 3px solid var(--accent);
+}
+
+.festival-when {
+  margin: 0 0 0.25rem;
+  font-weight: bold;
+}
+
+.empty-message {
+  text-align: center;
+  font-style: italic;
+}

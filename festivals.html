@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Festivals | The Calendar of Vandaal</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="festivals.css">
+</head>
+<body data-season="0">
+  <header>
+    <img class="stave-banner" src="stave-banner.png" width="455" height="82"
+     alt="Two carved Norse calendar staves, one for summer and one for winter">
+    <h1>All Festivals of Vandaal</h1>
+    <p class="site-nav"><a class="header-link" href="index.html">&larr; Back to the calendar</a></p>
+  </header>
+
+  <main>
+    <div class="filters">
+      <label for="filter-people">Festivals for</label>
+      <select id="filter-people"></select>
+      <label for="filter-culture">Culture</label>
+      <select id="filter-culture"></select>
+      <label for="filter-season">Season</label>
+      <select id="filter-season"></select>
+      <button type="button" id="filter-clear">Show all</button>
+      <span id="filter-count" class="filter-count" aria-live="polite"></span>
+    </div>
+
+    <nav id="season-links" class="season-links" aria-label="Jump to a season"></nav>
+    <div id="festival-list"></div>
+  </main>
+
+  <script src="calendar-data.js"></script>
+  <script src="calendar-logic.js"></script>
+  <script src="festivals.js"></script>
+</body>
+</html>
